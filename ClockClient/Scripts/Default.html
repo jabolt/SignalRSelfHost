@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <p>time now</p>
+    <div id="clock"></div>
+
+    <script src="Scripts/jquery-1.6.4.js"></script>
+    <script src="Scripts/jquery.signalR-2.2.2.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            
+            var con = $.hubConnection('http://localhost:8080');
+            var hub = con.createHubProxy('clockHub');
+            hub.on('showTime', function (t) {
+                $('#clock').text(t);
+            });
+            con.start();
+
+        });
+
+
+    </script>
+
+</body>
+
+</html>
